@@ -1,18 +1,17 @@
-READ_ME.txt
-Multi-resolution approximation model, v1.0: Serial Implementation
+### Multi-resolution approximation model, v1.0: Serial Implementation README
 December 28, 2018
 
 Software authors:
 Lewis Blake, Colorado School of Mines (lblake@mines.edu)
 Dorit Hammerling, Colorado School of Mines (hammerling@mines.edu)
 
----------------------------------------------------------------------------------------------
+
 This codebase is based on the MRA model described in
 "A multi-resolution approximation for massive spatial datasets" by Matthias Katzfuss, 2017 in 
 the Journal of American Statistical Association (DOI: 10.1080/01621459.2015.1123632)
 Also at arXiv: https://arxiv.org/abs/1507.04789
 References to this manuscript are found throughout the codebase.
----------------------------------------------------------------------------------------------
+
 
 Designed and implemented with MATLAB 2018a (Version 9.4)
 Previous versions may not be supported.
@@ -20,7 +19,7 @@ Required toolboxes:
 - Statistics and Machine Learning Toolbox
 - Optimization Toolbox
 
-GETTING STARTED:
+### GETTING STARTED: ###
 This MATLAB codebase allows users to apply the multi-resolution approximation model to 2D spatial data sets.
 
 The user_input.m script is where much of the user input can be modified (see USER INPUT and ADDITIONAL USER INPUT below).
@@ -36,24 +35,23 @@ The 'Prediction_Plots' folder is the default folder for spatial prediction plots
 The 'subroutines' folder contains the functions used to execute the model, and no other scripts.
 
 
-EXAMPLE DATA: 
+### EXAMPLE DATA: ###
 Two data sets are included in this distribution: satelliteData.mat and simulatedData.mat. 
 These files are contained within the 'Data' folder.
 Both of these datasets were originally presented in Heaton, M.J., Datta, A., Finley, A.O. et al. JABES (2018). https://doi.org/10.1007/s13253-018-00348-w
 
-PRELIMINARIES:
+### PRELIMINARIES: ###
 
-### find_num_levels_suggested.m ###
+### find_num_levels_suggested.m
 
 This is a stand-alone function and is not part of the subroutines.
 This function estimates the NUM_LEVELS_M for a given dataset size (NUM_DATA_POINTS_n), number of knots (NUM_KNOTS_r), and number of partitions (NUM_PARTITIONS_J).
 Note that NUM_LEVELS_M is a positive integer.
 
-###
 
-USER INPUT:
+### USER INPUT: ###
 
-### user_input.m ###
+### user_input.m
 
 In user_input.m, the areas requiring user input are as follows:
 
@@ -96,9 +94,9 @@ plotsFilePath: Optional file path to save prediction plots if plotting.
 Set to be a string (e.g. plotsFilesPath = '/Users/JerryGarcia/Pictures/';).
 By default plots are dumped in the 'Prediction_Plots' folder.
 
-ADDITIONAL USER INPUT
+### ADDITIONAL USER INPUT ###
 
-### load_data.m ###
+### load_data.m 
 
 In load_data.m the user can specify the data being used and the file path. 
 The file paths are presently relative for using the data provided. 
@@ -117,13 +115,12 @@ Data being used must have three columns 'lat', 'lon', and 'obs' denoting latitud
 The user can also change the values of theta and varEps in load_data.m.
 Values can determined by the 'optimize' mode. For the 'satellite' and 'simulated' data provided, those values determined by the 'optimize' mode are set as the default values.
 
-### evaluate_covariance.m ###
+### evaluate_covariance.m 
 
 evaluate_covariance is a general covariance function. By default, it is set as an exponential and can be changed here.
 
-###
 
-OUTPUT:
+### OUTPUT: ###
 
 Model output is dependent on the calculationType (computational mode) performed. 
 
@@ -136,5 +133,6 @@ Saving the plots produces can be accomplished by setting savePlots to true in us
 
 3) The 'likelihood' mode returns the log-likelihood to the command window if verbose is true. Otherwise, sumLogLikelihood will contain the log-likelihood in the workspace.
 
-NOTE: If computing on a remote server and file pathing is an issue, comment out the call addpath('subroutines') in main.m and copy files in subroutines into the same folder as main.m. 
+### NOTE: ###
+If computing on a remote server and file pathing is an issue, comment out the call addpath('subroutines') in main.m and copy files in subroutines into the same folder as main.m. 
 This may also be necessary for data sets as well.
