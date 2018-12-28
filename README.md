@@ -1,4 +1,4 @@
-### Multi-resolution approximation model, v1.0: Serial Implementation README
+### Multi-resolution approximation model, v1.0: Serial Implementation README ###
 December 28, 2018
 
 Software authors:
@@ -28,10 +28,10 @@ The main.m script runs the model.
 Within the Matlab Editor Tab, selecting the 'Run' button from main.m will execute the code.
 
 The codebase is structured as follows: The user_input.m script, the main.m script, the find_num_levels_suggested.m function, LICENSE.txt, and READ_ME.txt are contained within the 'Serial MRA' folder.
-Within the 'Serial MRA' folder, there are four other folders: 'Data, 'MRA_Prediction_Results', 'Prediction_Plots', and 'subroutines'.
+Within the 'Serial MRA' folder, there are four other folders: 'Data, 'Results', 'Plots', and 'subroutines'.
 The 'Data' folder contains example data sets.
-The 'MRA_Prediction_Results' folder is the default folder for spatial prediction results to be dumped. Initially empty.
-The 'Prediction_Plots' folder is the default folder for spatial prediction plots to be dumped. Initially empty.
+The 'Results' folder is the default folder for spatial prediction results to be dumped. Initially empty.
+The 'Plots' folder is the default folder for spatial prediction plots to be dumped. Initially empty.
 The 'subroutines' folder contains the functions used to execute the model, and no other scripts.
 
 
@@ -88,11 +88,11 @@ nYGrid: Number of prediction gridpoints in y-direction. By default set to 200.
 
 resultsFilePath: Optional file path to save prediction results. 
 Set to be a string (e.g. resultsFilesPath = '/Users/JerryGarcia/Desktop/';). 
-By default prediction results are dumped in the 'MRA_Prediction_Results' folder.
+By default prediction results are dumped in the 'Results' folder.
 
 plotsFilePath: Optional file path to save prediction plots if plotting.
 Set to be a string (e.g. plotsFilesPath = '/Users/JerryGarcia/Pictures/';).
-By default plots are dumped in the 'Prediction_Plots' folder.
+By default plots are dumped in the 'PPlots' folder.
 
 ### ADDITIONAL USER INPUT ###
 
