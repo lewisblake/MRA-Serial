@@ -80,6 +80,7 @@ NUM_KNOTS_r: Number of knots per partition. By default set to 64.
 offsetPercentage: Offset percentage from partition boundaries. Must be between 0 and 1.
 This quantity determines the buffer between the boundaries of a region where knots can be placed.
 offsetPercentage is also used at the coarsest resolution to extend the maximal x and y domain boundaries as to include datapoints that may be exactly on the boundary within a region.
+The domain boundaries define a rectangular region defined by the minimal and maximal x and y coordinate locations.
 Preferably set offsetPercentage to be a smaller number (e.g. 0.01).
 
 nXGrid: Number of prediction grid points in x-direction. By default set to 200.
