@@ -1,4 +1,5 @@
-%% USER_INPUT is where users input parameters for the MRA model
+%% USER_INPUT for the MRA model
+% Script where users can set parameters
 %
 %   Authors: Lewis Blake, Colorado School of Mines (lblake@mines.edu)
 %            Dorit Hammerling, Colorado School of Mines (hammerling@mines.edu)
