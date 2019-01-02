@@ -92,7 +92,7 @@ By default prediction results are dumped in the 'Results' folder.
 
 plotsFilePath: Optional file path to save prediction plots if plotting.
 Set to be a string (e.g. plotsFilesPath = '/Users/JerryGarcia/Pictures/';).
-By default plots are dumped in the 'PPlots' folder.
+By default plots are dumped in the 'Plots' folder.
 
 ### ADDITIONAL USER INPUT ###
 
