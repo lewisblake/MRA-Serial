@@ -2,7 +2,9 @@ function [] = validate_user_input(NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, o
 %% USER_INPUT_ERROR_HANDLING checks validity of user input
 %
 %   Input: NUM_LEVELS_M (double), NUM_PARTITIONS_J (double), NUM_KNOTS_r
-%   (knots), offsetPercentage (double), nXGrid (double), nYGrid (double)
+%   (double), offsetPercentage (double), nXGrid (double), nYGrid (double),
+%   displayPlots (boolean), savePlots(boolean), verbose (boolean), resultsFilePath (char),
+%   plotsFilePath (char)
 %
 %   Output: [] (empty vector)
 %
