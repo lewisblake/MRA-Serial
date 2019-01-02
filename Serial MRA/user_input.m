@@ -38,7 +38,7 @@ nXGrid = 200; % Number of prediction grid points in x-direction. Only required f
 nYGrid = 200; % Number of prediction grid points in y-direction. Only required for 'prediction' calculationType. Default is 200.
 % Optional: select file paths to save prediction results and plots if
 % predicting. e.g. resultsFilesPath = '/Users/JerryGarcia/Desktop/';
-resultsFilePath = './Results/';  % By default, prediction results are dumped into esults folder
+resultsFilePath = './Results/';  % By default, prediction results are dumped into Results folder
 plotsFilePath = './Plots/'; % By default, plots are dumped into Plots folder
 
 %% Inputs relevant if calculationType = 'optimize'
