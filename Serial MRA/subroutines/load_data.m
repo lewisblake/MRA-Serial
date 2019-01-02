@@ -8,9 +8,6 @@ function [ data, regressionModel, domainBoundaries, predictionVector, theta, var
 %   Output: data (matrix), regressionModel (LinearModel), domainBoundaries
 %   (vector), predictionVector (matrix), theta (vector), varEps (double)
 %%
-if ~(offsetPercentage > 0 || offsetPercentage < 100)
-    error('Error. offsetPercentage must be a valid percentage')
-end
 
 switch dataSource
     
