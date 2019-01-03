@@ -8,16 +8,19 @@
 % Run user_input.m script to get variables into workspace
 user_input;
 %% Check User Input is valid
-validate_user_input(NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, offsetPercentage, nXGrid, nYGrid, displayPlots, savePlots, verbose, resultsFilePath, plotsFilePath)
+validate_user_input(calculationType, NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, offsetPercentage, NUM_WORKERS, nXGrid, nYGrid, displayPlots, savePlots, verbose, resultsFilePath, plotsFilePath);
+%% Begin Parallel Pool
+if isempty(gcp) % If there is no current parallel pool
+    parpool(NUM_WORKERS) % Create parallel pool on default cluster of size NUM_WORKERS
+end
 %% Data Processing: Load data using load_data() function
 [ data, regressionModel, domainBoundaries, predictionVector, theta, varEps ] = load_data(dataSource, nXGrid, nYGrid, offsetPercentage, verbose);
-
 %% Build hierarchical grid structure using build_structure() function
 [ knots, ~, nRegions, outputData, predictionLocations ] = build_structure(NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, domainBoundaries, offsetPercentage, verbose, data(:,1:3), predictionVector);
-
 %% Switch cases for calculationType
-switch calculationType    
-    case 'optimize'
+% Potential optimization
+switch calculationType
+    case 'optimize'        
         %% Optimize
         isPredicting = false;
         fun = @(thetaOpt)MRA([thetaOpt(1) thetaOpt(2)], outputData, knots, ...
@@ -30,9 +33,10 @@ switch calculationType
         % Assign values from optimization to theta and varEps
         theta = [x(1) x(2)];
         varEps = x(3);
+        save([resultsFilePath, 'Optimization_Results'], 'theta', 'varEps');
     case 'prediction'
         %% Prediction
-        isPredicting = true; % MRA should predict
+        isPredicting = true;
         tic;
         [ sumLogLikelihood, predictions ] = MRA(theta, outputData, knots, ...
             NUM_LEVELS_M, NUM_PARTITIONS_J, nRegions, isPredicting, verbose, varEps, predictionLocations);
@@ -42,9 +46,9 @@ switch calculationType
         % Add the prediction from the regression
         predRegression = predict(regressionModel, predictionLocations);
         predictionMean = predictions(:,1) + predRegression;
-        save([resultsFilePath, 'Results_MRA_', dataSource], 'predictionLocations', 'predictionMean', 'predictionVariance');
+        save([resultsFilePath,'Prediction_Results_', dataSource], 'predictionLocations', 'predictionMean', 'predictionVariance');
         %% Plots
-        if displayPlots || savePlots
+        if displayPlots || savePlots % If plotting
             create_plots(data, predictionLocations, predictionMean, predictionVariance, verbose, displayPlots, savePlots, plotsFilePath)
         end
     case 'likelihood'
@@ -57,9 +61,10 @@ switch calculationType
         if verbose % Display the sumLogLikelihood
             sumLogLikelihood
         end
+        save([resultsFilePath, 'Likelihood_Results'], 'sumLogLikelihood');
     otherwise
         error('Undefined calculationType. Code is not executed.')
 end
-if verbose % Display progress indicators
+if verbose
     disp('MRA execution completed');
 end
