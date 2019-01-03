@@ -62,14 +62,10 @@ dataSource: | 'satellite' | 'simulated' |
 calculationType: | 'prediction' | 'optimize' | 'likelihood' |
 calculationType can be set to any of the following calculation modes:
 	- prediction: Uses given values for the parameters (theta and varEps) and just conducts spatial prediction. Parameters can be changed in load_data.m	
-	- optimize: Optimizes over the range, variance (theta) and measurement error (varEps).	
+	- optimize: Optimizes over the range, variance and measurement error. The range and variance parameters are stored as a vector: theta. The measurment error is stored as a double: varEps.	
 	- likelihood: Calculates the log-likelihood.
 
-displayPlots: Boolean variable indicating whether to display plots if predicting.
-savePlots: Boolean variable indicating whether to save plots if predicting.
-(Note: If not executing the 'prediction' calculationType, these booleans are not relevant.)
-
-verbose: Boolean variable indicating whether to produce progress indicators.
+#### User Input relevant for any calculationType:
 
 NUM_LEVELS_M: Total number of levels in the hierarchical domain-partitioning. By default set to 9.
 
@@ -79,21 +75,38 @@ NUM_KNOTS_r: Number of knots per partition. By default set to 64.
 
 offsetPercentage: Offset percentage from partition boundaries. Must be between 0 and 1.
 This quantity determines the buffer between the boundaries of a region where knots can be placed.
-offsetPercentage is also used at the coarsest resolution to extend the maximal x and y domain boundaries as to include datapoints that may be exactly on the boundary within a region.
+offsetPercentage is also used at the coarsest resolution to extend the maximal x and y domain boundaries as to include data points that may be exactly on the boundary within a region.
 The domain boundaries define a rectangular region defined by the minimal and maximal x and y coordinate locations.
 Preferably set offsetPercentage to be a smaller number (e.g. 0.01).
 
+verbose: Boolean variable indicating whether to produce progress indicators.
+
+resultsFilePath: Optional file path to save results for each calculationType. 
+Set to be a string (e.g. resultsFilesPath = '/Users/JerryGarcia/Desktop/';). 
+By default results are saved in the 'Results' folder.
+
+#### User inputs relevant if calculationType = 'prediction'
+
+displayPlots: Boolean variable indicating whether to display plots if predicting.
+savePlots: Boolean variable indicating whether to save plots if predicting.
+(Note: If not executing the 'prediction' calculationType, these booleans are not relevant.)
+
 nXGrid: Number of prediction grid points in x-direction. By default set to 200.
 nYGrid: Number of prediction gridpoints in y-direction. By default set to 200.
-(Note: These parameters define a nXGrid x nYGrid prediction grid of spatial prediction locations if predicting.)
-
-resultsFilePath: Optional file path to save prediction results. 
-Set to be a string (e.g. resultsFilesPath = '/Users/JerryGarcia/Desktop/';). 
-By default prediction results are dumped in the 'Results' folder.
+(Note: These parameters define a nXGrid x nYGrid prediction grid of spatial prediction locations if predicting.
+The prediction grid is defined within rectangular region given by the domain boundaries discussed above.)
 
 plotsFilePath: Optional file path to save prediction plots if plotting.
 Set to be a string (e.g. plotsFilesPath = '/Users/JerryGarcia/Pictures/';).
-By default plots are dumped in the 'Plots' folder.
+By default plots are saved in the 'Plots' folder.
+
+User inputs relevant if calculationType = 'optimize'
+
+lowerBound: Vector of lower-bound values required for the optimization search. Default is [0,0,0].
+
+upperBound: Vector of upper-bound values required for the optimization search. Default is [10,1,5].
+
+initialEstimate: Vector of inital estimates of parameteres required for the optimization search. Default is [5, 0.3, 0.1].
 
 ## ADDITIONAL USER INPUT
 
@@ -125,14 +138,15 @@ evaluate_covariance is a general covariance function. By default, it is set as a
 
 Model output is dependent on the calculationType (computational mode) performed. 
 
-1) For the 'prediction' mode, the output is a .mat file with the MRA results. This .mat file contains the prediction locations, prediction mean, and the prediction variance.
+1) For the 'prediction' mode, the output is a .mat file with the MRA results stored within the Results folder. This .mat file contains the prediction locations, prediction mean, and the prediction variance.
 If either boolean variables 'displayPlots' or 'savePlots' are set to true, three plots are also produced corresponding to the observations, predicted values, and the prediction variance with the create_plots() function. 
 If computing on a remote server without a GUI, saving these images produced in main.m will be needed.
 Saving the plots produces can be accomplished by setting savePlots to true in user_input.m. 
 
-2) For the 'optimize' mode, optimized values for theta and varEps are stored within their variables names in the workspace. 
+2) For the 'optimize' mode, optimized values for theta and varEps are stored in a .mat file stored witin the Results folder. 
 
-3) The 'likelihood' mode returns the log-likelihood to the command window if verbose is true. Otherwise, sumLogLikelihood will contain the log-likelihood in the workspace.
+3) The 'likelihood' mode returns the log-likelihood stored in a .mat file within the Results folder.
+If verbose is set to true, the log-likelihood will print to the Command Window as well.
 
 ## NOTE:
 If computing on a remote server and file pathing is an issue, comment out the call addpath('subroutines') in main.m and copy files in subroutines into the same folder as main.m. 
