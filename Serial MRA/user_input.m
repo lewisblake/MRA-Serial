@@ -15,7 +15,7 @@
 clear all; addpath('subroutines');
 %% User Input: dataSource and calculationType
 % Choose dataSource. Set to be a char corresponding to a case within the
-% swtich clause of load_data.m
+% switch clause of load_data.m
 % Included data sets are 'satellite' and 'simulated'.
 dataSource = 'satellite'; % Default is 'satellite'.
 % Choose calculationType: | 'prediction | 'optimize' | 'likelihood' |
@@ -38,7 +38,7 @@ nXGrid = 200; % Number of prediction grid points in x-direction. Only required f
 nYGrid = 200; % Number of prediction grid points in y-direction. Only required for 'prediction' calculationType. Default is 200.
 % Optional: select file paths to save prediction results and plots if
 % predicting. e.g. resultsFilesPath = '/Users/JerryGarcia/Desktop/';
-plotsFilePath = './Plots/'; % By default, plots are dumped into Plots folder
+plotsFilePath = './Plots/'; % By default, plots are dumped into Plots folder.
 
 %% Inputs relevant if calculationType = 'optimize'
 % Limits and initial values for parameter search
