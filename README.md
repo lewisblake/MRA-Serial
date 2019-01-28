@@ -27,7 +27,9 @@ If desired, users should modify model parameters within user_input.m.
 The main.m script runs the model. 
 Within the Matlab Editor Tab, selecting the 'Run' button from main.m will execute the code.
 
-The codebase is structured as follows: The user_input.m script, the main.m script, the find_num_levels_suggested.m function, LICENSE.txt, and READ_ME.txt are contained within the 'Serial MRA' folder.
+The repository is structured as follows: 
+The LICENSE.txt, READ_ME.txt, and 'Serial MRA' folder are contained within the 'MRA-Serial' repository.
+The user_input.m script, the main.m script, the find_num_levels_suggested.m function are contained within the 'Serial MRA' folder.
 Within the 'Serial MRA' folder, there are four other folders: 'Data, 'Results', 'Plots', and 'subroutines'.
 The 'Data' folder contains example data sets.
 The 'Results' folder is the default folder for spatial prediction results to be dumped. Initially empty.
