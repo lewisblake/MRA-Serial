@@ -8,11 +8,7 @@
 % Run user_input.m script to get variables into workspace
 user_input;
 %% Check User Input is valid
-validate_user_input(calculationType, NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, offsetPercentage, NUM_WORKERS, nXGrid, nYGrid, displayPlots, savePlots, verbose, resultsFilePath, plotsFilePath);
-%% Begin Parallel Pool
-if isempty(gcp) % If there is no current parallel pool
-    parpool(NUM_WORKERS) % Create parallel pool on default cluster of size NUM_WORKERS
-end
+validate_user_input(calculationType, NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, offsetPercentage, nXGrid, nYGrid, displayPlots, savePlots, verbose, resultsFilePath, plotsFilePath);
 %% Data Processing: Load data using load_data() function
 [ data, regressionModel, domainBoundaries, predictionVector, theta, varEps ] = load_data(dataSource, nXGrid, nYGrid, offsetPercentage, verbose);
 %% Build hierarchical grid structure using build_structure() function
