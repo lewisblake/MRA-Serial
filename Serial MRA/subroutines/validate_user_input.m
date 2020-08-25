@@ -1,4 +1,4 @@
-function [] = validate_user_input(NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, offsetPercentage, nXGrid, nYGrid, displayPlots, savePlots, verbose, resultsFilePath, plotsFilePath)
+function [] = validate_user_input(calculationType, NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, offsetPercentage, nXGrid, nYGrid, displayPlots, savePlots, verbose, resultsFilePath, plotsFilePath)
 %% USER_INPUT_ERROR_HANDLING checks validity of user input
 %
 %   Input: NUM_LEVELS_M (double), NUM_PARTITIONS_J (double), NUM_KNOTS_r
@@ -11,7 +11,9 @@ function [] = validate_user_input(NUM_LEVELS_M, NUM_PARTITIONS_J, NUM_KNOTS_r, o
 
 % Error handling on all input arguments except for dataSource which is
 % checked within load_data.m
-if ~isa(NUM_LEVELS_M, 'double') || isinf(NUM_LEVELS_M) || (~isinf(NUM_LEVELS_M) && floor(NUM_LEVELS_M) ~= NUM_LEVELS_M)
+if ~strcmp(calculationType, {'predicition', 'likelihood', 'optimize', 'build_structure'})
+    error('myfuns:validate_user_input: calculationType must be either prediction, likelihood, optimize, or build_structure')
+elseif ~isa(NUM_LEVELS_M, 'double') || isinf(NUM_LEVELS_M) || (~isinf(NUM_LEVELS_M) && floor(NUM_LEVELS_M) ~= NUM_LEVELS_M)
     error('myfuns:validate_user_input: NUM_LEVELS_M must be a positive integer of class double.')
 elseif ~isa(NUM_PARTITIONS_J, 'double') || (NUM_PARTITIONS_J ~= 2 && NUM_PARTITIONS_J ~= 4) || isinf(NUM_PARTITIONS_J) || (~isinf(NUM_PARTITIONS_J) && floor(NUM_PARTITIONS_J) ~= NUM_PARTITIONS_J)
     error('myfuns:validate_user_input: NUM_PARTITIONS_J must be either 2 or 4.')
@@ -36,4 +38,6 @@ elseif ~ischar(plotsFilePath)
 end
 
 end
+
+
 
